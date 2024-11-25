@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task'])) {
     if (!empty($task)) {
         $stmt = $pdo->prepare("INSERT INTO todos (task) VALUES (:task)");
         $stmt->execute([':task' => $task]);
-        header("Location: index.php");
+        header("Location: todo_app.php");
         exit;
     }
 }
@@ -16,7 +16,7 @@ if (isset($_GET['delete'])) {
     $id = intval($_GET['delete']);
     $stmt = $pdo->prepare("DELETE FROM todos WHERE id = :id");
     $stmt->execute([':id' => $id]);
-    header("Location: index.php");
+    header("Location: todo_app.php");
     exit;
 }
 
