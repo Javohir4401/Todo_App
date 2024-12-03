@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task'], $_POST['due_d
         try {
             $stmt = $pdo->prepare("INSERT INTO todo (title, status, due_date, created_at) VALUES (:title, 'pending', :due_date, NOW())");
             $stmt->execute([':title' => $task, ':due_date' => $due_date]);
-            header("Location: todo_app.php");
+            header("Location: index.php");
             exit;
         } catch (PDOException $e) {
             die("Vazifani qo'shishda xatolik: " . $e->getMessage());
@@ -27,7 +27,7 @@ if (isset($_GET['delete'])) {
     try {
         $stmt = $pdo->prepare("DELETE FROM todo WHERE id = :id");
         $stmt->execute([':id' => $id]);
-        header("Location: todo_app.php");
+        header("Location: index.php");
         exit;
     } catch (PDOException $e) {
         die("Vazifani o'chirishda xatolik: " . $e->getMessage());
@@ -48,7 +48,7 @@ if (isset($_GET['toggle'])) {
             WHERE id = :id
         ");
         $stmt->execute([':id' => $id]);
-        header("Location: todo_app.php");
+        header("Location: index.php");
         exit;
     } catch (PDOException $e) {
         die("Holatni o'zgartirishda xatolik: " . $e->getMessage());
